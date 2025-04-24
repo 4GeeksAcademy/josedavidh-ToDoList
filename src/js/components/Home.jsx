@@ -1,26 +1,56 @@
-import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, {useState} from "react";
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-            
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+	const [task,setTask] = useState("");
+	const [taskList, setTaskList] = useState ([]);
+
+	const handleData = (event) => {
+		setTask(event.target.value);
+	}
+
+	const addTask = (event) => {
+		if (event.key == "Enter") {
+			setTaskList([...taskList, task])
+			setTask("");
+		}
+	}
+
+
+
+	return (
+		<div className="container">
+			<div className="row d-flex justify-content-center">
+				<div className="col-12 col-md-7 border border-danger">
+					<h1 className="Title_size d-flex justify-content-center">To Do's</h1>
+
+					<form className="border p-3">
+						<input
+							type="text"
+							placeholder="Ingresa la tarea"
+							className="form-control mt-2"
+							name="taskName"
+							value={task}
+							onKeyDown={addTask}
+							onChange={handleData}
+						/>
+					</form>
+
+					<ul className="list-group mt-3">
+						{taskList.length === 0 ? (
+							<li className="list-group-item text-muted">No hay tareas, añadir tareas</li>
+						) : (
+							taskList.map((item, index) => (
+								<li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+									{item}
+								</li>
+							))
+						)}
+					</ul>
+
+				</div>
+			</div>
 		</div>
 	);
 };
