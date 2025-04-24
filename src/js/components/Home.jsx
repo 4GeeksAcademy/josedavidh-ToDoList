@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 //create your first component
 const Home = () => {
 
-	const [task,setTask] = useState("");
-	const [taskList, setTaskList] = useState ([]);
+	const [task, setTask] = useState("");
+	const [taskList, setTaskList] = useState([]);
 
 	const handleData = (event) => {
 		setTask(event.target.value);
@@ -12,10 +12,16 @@ const Home = () => {
 
 	const addTask = (event) => {
 		if (event.key == "Enter") {
+			event.preventDefault();
 			setTaskList([...taskList, task])
 			setTask("");
 		}
 	}
+
+	const deleteTask = (indexToDelete) => {
+		const newList = taskList.filter((_, index) => index !== indexToDelete);
+		setTaskList(newList);
+	};
 
 
 
@@ -39,11 +45,22 @@ const Home = () => {
 
 					<ul className="list-group mt-3">
 						{taskList.length === 0 ? (
-							<li className="list-group-item text-muted">No hay tareas, añadir tareas</li>
+							<li className="list-group-item text-muted">
+								No hay tareas, añadir tareas
+							</li>
 						) : (
 							taskList.map((item, index) => (
-								<li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-									{item}
+								<li
+									key={index}
+									className="list-group-item d-flex justify-content-between align-items-center task-item"
+								>
+									<span>{item}</span>
+									<span
+										className="delete-icon"
+										onClick={() => deleteTask(index)}
+									>
+										❌
+									</span>
 								</li>
 							))
 						)}
