@@ -39,6 +39,7 @@ const Home = () => {
                             <input
                                 type="text"
                                 className=""
+                                name="task"
                                 placeholder="What is the task?"
                                 value={task.task}
                                 onChange={HandleChange}
