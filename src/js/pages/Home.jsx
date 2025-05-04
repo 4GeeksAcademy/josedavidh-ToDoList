@@ -40,7 +40,7 @@ const Home = () => {
                                 type="text"
                                 className=""
                                 name="task"
-                                placeholder="What is the task?"
+                                placeholder="Enter a the task"
                                 value={task.task}
                                 onChange={HandleChange}
                                 onKeyDown={saveTask}
@@ -67,9 +67,6 @@ const Home = () => {
                                 `${taskList.length} item left`
                             }
                         </span>
-                    </div>
-                    <div className="decoration">
-                        <div></div>
                     </div>
                 </div>
             </div>
